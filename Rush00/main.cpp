@@ -1,77 +1,79 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kroutled <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/09 08:12:55 by kroutled          #+#    #+#             */
-/*   Updated: 2018/06/09 08:12:56 by kroutled         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "entity.hpp"
+#include "game.hpp"
 #include <cmath>
 
 int     main(void){
+
+    Game    *game;
+    int     c;
 
     initscr();
     noecho();
     cbreak();
     curs_set(0);
+    keypad(stdscr, true);
 
-    int c, yMax, xMax;
-    getmaxyx(stdscr, yMax, xMax);
+    do{ 
+        clear();
+        game->launchGame();
+        refresh();
 
-    WINDOW *win = newwin(20, 100, (yMax/2) - 10, 10);
-    box(win, 0, 0);
-    refresh();
-    wrefresh(win);
+        if ((c = getch()) == 's' || (c = getch()) == 'S'){
+            while ((c = getch()) != 27){
+                clear();
+                game->rules();
+                refresh(); 
 
-    Entity *player = new Entity(win, yMax-2, round(xMax/5), 'T');
-    
-    while ((c = wgetch(win)) != 27){
-         player->ft_getMove(c);
-         player->ft_display();
-         wrefresh(win);
-     }
+                if ((c = getch()) == 's' || (c = getch()) == 'S'){
+                    clear();
+                    int c, yMax, xMax;
+                    getmaxyx(stdscr, yMax, xMax);
 
-    // do{
-    //     // printw("Hello World");
-    //     player->ft_display();
-    // }while ((c = getch()) != 27);
+                    WINDOW *win = newwin(20, 100, (yMax/2) - 10, 10);
+                    box(win, 0, 0);
+                    refresh();
+                    wrefresh(win);
+
+                    Entity *player = new Entity(win, yMax-2, round(xMax/5), 'T');
+                    
+                    while ((c = wgetch(win)) != 27){
+                        player->ft_getMove(c);
+                        player->ft_display();
+                        wrefresh(win);
+                        refresh(); 
+                    } 
+                }   
+            }
+        } 
+    }while ((c = getch()) != 27);
 
     endwin();
 }
-    
-// int main(void){
 
-//     //initialize screen
+
+// int     main(void){
+
 //     initscr();
 //     noecho();
+//     cbreak();
+//     curs_set(0);
 
-//     //movement
-//     int c; 
-
-//     //get screen size
-//     int yMax, xMax;
+//     int c, yMax, xMax;
 //     getmaxyx(stdscr, yMax, xMax);
 
-//     //window for the player
 //     WINDOW *win = newwin(20, 100, (yMax/2) - 10, 10);
 //     box(win, 0, 0);
 //     refresh();
 //     wrefresh(win);
 
-//     Entity *player = new Entity(win, 1, 1, 'T');
-
-//      while ((c = wgetch(win)) != 27){
+//     Entity *player = new Entity(win, yMax-2, round(xMax/5), 'T');
+    
+//     while ((c = wgetch(win)) != 27){
 //          player->ft_getMove(c);
 //          player->ft_display();
 //          wrefresh(win);
-
 //      }
 
-//     // attroff(COLOR_PAIR(1)); 
 //     endwin();
 // }

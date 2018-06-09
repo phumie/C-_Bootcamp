@@ -11,9 +11,8 @@ Entity::Entity( WINDOW *win, int y, int x, char bod){
     return;
 }
 
-Entity  Entity::Entity(Entity const &src) {
+Entity::Entity(Entity const &src) {
     *this = src;
-    return *this;
 }
 
 Entity::~Entity ( void ){

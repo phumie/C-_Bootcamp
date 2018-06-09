@@ -1,24 +1,19 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ship.hpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kroutled <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/09 08:12:05 by kroutled          #+#    #+#             */
-/*   Updated: 2018/06/09 08:12:07 by kroutled         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef SHIP_HPP
 # define SHIP_HPP
 
-class ship{
+#include "entity.hpp"
+
+class Ship{
 
     public:
-        ship();
-        ~ship();
+        Ship();
+        ~Ship();
 
+};
+
+class createShip: public Entity{
+        
 };
 
 #endif
